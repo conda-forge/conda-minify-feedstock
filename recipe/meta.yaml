@@ -13,7 +13,7 @@ build:
   entry_points:
     - conda-minify = conda_minify.__main__:main
   noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 1
 
 requirements:
@@ -22,6 +22,7 @@ requirements:
     - pip
     - conda >=4.3.0
     - pyyaml >3.0
+    - setuptools
   run:
     - python >={{ python_min }},<4.0
     - conda >=4.3.0
