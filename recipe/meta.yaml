@@ -6,24 +6,25 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/conda-minify-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/conda-minify-{{ version }}.tar.gz
   sha256: 1de1b33faa0eb05a40b0f4136470397a7db4dbfdd98ad8c441e3b07cce6daa77
 
 build:
   entry_points:
     - conda-minify = conda_minify.__main__:main
   noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 1
 
 requirements:
   host:
-    - python >=3.8,<4.0
+    - python {{ python_min }}
     - pip
     - conda >=4.3.0
     - pyyaml >3.0
+    - setuptools
   run:
-    - python >=3.8,<4.0
+    - python >={{ python_min }},<4.0
     - conda >=4.3.0
     - pyyaml >3.0
 
@@ -35,6 +36,7 @@ test:
     - conda-minify --help
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/jamespreed/conda-minify
