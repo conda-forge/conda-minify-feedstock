@@ -25,12 +25,12 @@ requirements:
   host:
     - python ${{ python_min }}.*
     - pip
-    - conda >=4.3.0
+    - conda >=4.3.0,<25.9.0
     - pyyaml >3.0
     - setuptools
   run:
     - python >=${{ python_min }},<4.0
-    - conda >=4.3.0
+    - conda >=4.3.0,<25.9.0
     - pyyaml >3.0
 
 tests:
